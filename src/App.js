@@ -98,3 +98,29 @@ function Modal(props) {
 }
 
 export default App;
+
+/* 옛날 리액트 문법
+
+class Profile extends React.Component{
+  constructor(){
+    super();
+    this.state = { name: 'kim', age: 30 }
+  }
+}
+
+changeName(){
+  this.setState({name: 'Park' })
+}
+
+
+render(){
+  return(
+    <div>
+    <h3> 프로필입니다</h3>
+    <p>저는 { this.state.name } 입니다</p>
+    <button onClick={ this.changeName.bind(this) }>버튼</button>
+    </div>
+  )
+}
+
+ */
