@@ -63,6 +63,23 @@ function App() {
         열고닫기
       </button>
 
+      <div className="publish">
+        <input
+          onChange={(e) => {
+            입력값변경(e.target.value);
+          }}
+        />
+        <button
+          onClick={() => {
+            let arrayCopy = [...글제목];
+            arrayCopy.unshift(입력값);
+            글제목변경(arrayCopy);
+          }}
+        >
+          저장
+        </button>
+      </div>
+
       {modal === true ? (
         <Modal 자식글제목={글제목} 누른제목={누른제목} 글내용={글내용}></Modal>
       ) : null}
