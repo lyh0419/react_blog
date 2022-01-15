@@ -11,24 +11,17 @@ function App() {
     "태경이 코트 추천",
   ]);
 
+  let [글내용, 글내용변경] = useState([
+    "로스트아크, 검은사막, 더 포레스트",
+    "치킨, 떡볶이, 모듬 회",
+    "검은색 싱글코트, 투 버튼 베이지 코트, 흰색 롱 코트 ",
+  ]);
+
   let [modal, modal변경] = useState(false);
-
   let [따봉, 따봉변경] = useState(0);
-  let posts = "현우 고기 맛집";
+  let [누른제목, 누른제목변경] = useState(0);
 
-  //버튼 만들기 함수들
-  /*function 제목바꾸기() {
-    let newArray = [...글제목];
-    newArray[1] = "영훈이 게임 추천";
-    글제목변경(newArray);
-  }
-
-  function 순서정렬() {
-    let sod = [...글제목];
-    sod[0] = 글제목[1];
-    sod[1] = 글제목[0];
-    글제목변경(sod);
-  } */
+  let [입력값, 입력값변경] = useState("");
 
   return (
     <div className="App">
@@ -36,53 +29,53 @@ function App() {
         <div>개발 Blog</div>
       </div>
 
-      <div className="list">
-        <h3>
-          {글제목[0]}{" "}
-          <span
-            onClick={() => {
-              따봉변경(따봉 + 1);
-            }}
-          >
-            따봉👍
-          </span>{" "}
-          {따봉}
-        </h3>
-        <p>1월 13일 발행</p>
-        <hr />
-      </div>
-
-      <div className="list">
-        <h3>{글제목[1]}</h3>
-        <p>1월 14일 발행</p>
-        <hr />
-      </div>
-
-      <div className="list">
-        <h3>{글제목[2]}</h3>
-        <p>1월 15일 발행</p>
-        <hr />
-      </div>
+      {글제목.map(function (글, i) {
+        return (
+          <div className="list" key={i}>
+            <h3
+              onClick={() => {
+                누른제목변경(i);
+              }}
+            >
+              {글}
+              <span
+                onClick={() => {
+                  {
+                    따봉변경(따봉 + 1);
+                  }
+                }}
+              >
+                👍
+              </span>
+              {따봉}
+            </h3>
+            <p>1월 14일</p>
+            <hr />
+          </div>
+        );
+      })}
 
       <button
         onClick={() => {
           modal변경(!modal);
         }}
       >
-        상세페이지
+        열고닫기
       </button>
 
-      {modal === true ? <Modal></Modal> : null}
+      {modal === true ? (
+        <Modal 자식글제목={글제목} 누른제목={누른제목} 글내용={글내용}></Modal>
+      ) : null}
     </div>
   );
 }
 
-function Modal() {
+function Modal(props) {
   return (
     <div className="modal">
-      <h2>제목</h2>
-      <p>날짜</p>
-      <p>상세내용</p>
+      <h2>{props.자식글제목[props.누른제목]}</h2>
+      <p>1월14일</p>
+      <p>{props.글내용[props.누른제목]}</p>
     </div>
   );
 }
